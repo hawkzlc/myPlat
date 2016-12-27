@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ysj.user.client.AreaTreeMapper">
+  <resultMap id="BaseResultMap" type="com.ysj.user.model.AreaTree">
+    <id column="area_id" jdbcType="INTEGER" property="areaId" />
+    <result column="area_code" jdbcType="VARCHAR" property="areaCode" />
+    <result column="area_level" jdbcType="VARCHAR" property="areaLevel" />
+    <result column="area_name" jdbcType="VARCHAR" property="areaName" />
+    <result column="parent_area_code" jdbcType="VARCHAR" property="parentAreaCode" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="key_words" jdbcType="VARCHAR" property="keyWords" />
+    <result column="area_region_code" jdbcType="VARCHAR" property="areaRegionCode" />
+    <result column="area_zip_code" jdbcType="VARCHAR" property="areaZipCode" />
+    <result column="area_phone_code" jdbcType="VARCHAR" property="areaPhoneCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    area_id, area_code, area_level, area_name, parent_area_code, parent_id, key_words, 
+    area_region_code, area_zip_code, area_phone_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from area_tree
+    where area_id = #{areaId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from area_tree
+    where area_id = #{areaId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ysj.user.model.AreaTree">
+    insert into area_tree (area_id, area_code, area_level, 
+      area_name, parent_area_code, parent_id, 
+      key_words, area_region_code, area_zip_code, 
+      area_phone_code)
+    values (#{areaId,jdbcType=INTEGER}, #{areaCode,jdbcType=VARCHAR}, #{areaLevel,jdbcType=VARCHAR}, 
+      #{areaName,jdbcType=VARCHAR}, #{parentAreaCode,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, 
+      #{keyWords,jdbcType=VARCHAR}, #{areaRegionCode,jdbcType=VARCHAR}, #{areaZipCode,jdbcType=VARCHAR}, 
+      #{areaPhoneCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ysj.user.model.AreaTree">
+    insert into area_tree
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="areaId != null">
+        area_id,
+      </if>
+      <if test="areaCode != null">
+        area_code,
+      </if>
+      <if test="areaLevel != null">
+        area_level,
+      </if>
+      <if test="areaName != null">
+        area_name,
+      </if>
+      <if test="parentAreaCode != null">
+        parent_area_code,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="keyWords != null">
+        key_words,
+      </if>
+      <if test="areaRegionCode != null">
+        area_region_code,
+      </if>
+      <if test="areaZipCode != null">
+        area_zip_code,
+      </if>
+      <if test="areaPhoneCode != null">
+        area_phone_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="areaId != null">
+        #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="areaCode != null">
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaLevel != null">
+        #{areaLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null">
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentAreaCode != null">
+        #{parentAreaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="keyWords != null">
+        #{keyWords,jdbcType=VARCHAR},
+      </if>
+      <if test="areaRegionCode != null">
+        #{areaRegionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaZipCode != null">
+        #{areaZipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaPhoneCode != null">
+        #{areaPhoneCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ysj.user.model.AreaTree">
+    update area_tree
+    <set>
+      <if test="areaCode != null">
+        area_code = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaLevel != null">
+        area_level = #{areaLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null">
+        area_name = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentAreaCode != null">
+        parent_area_code = #{parentAreaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="keyWords != null">
+        key_words = #{keyWords,jdbcType=VARCHAR},
+      </if>
+      <if test="areaRegionCode != null">
+        area_region_code = #{areaRegionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaZipCode != null">
+        area_zip_code = #{areaZipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaPhoneCode != null">
+        area_phone_code = #{areaPhoneCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where area_id = #{areaId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ysj.user.model.AreaTree">
+    update area_tree
+    set area_code = #{areaCode,jdbcType=VARCHAR},
+      area_level = #{areaLevel,jdbcType=VARCHAR},
+      area_name = #{areaName,jdbcType=VARCHAR},
+      parent_area_code = #{parentAreaCode,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      key_words = #{keyWords,jdbcType=VARCHAR},
+      area_region_code = #{areaRegionCode,jdbcType=VARCHAR},
+      area_zip_code = #{areaZipCode,jdbcType=VARCHAR},
+      area_phone_code = #{areaPhoneCode,jdbcType=VARCHAR}
+    where area_id = #{areaId,jdbcType=INTEGER}
+  </update>
+</mapper>
