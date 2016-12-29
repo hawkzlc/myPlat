@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ysj.user.client.AreaTreeMapper">
-  <resultMap id="BaseResultMap" type="com.ysj.user.model.AreaTree">
+<mapper namespace="com.yue.ums.client.AreaTreeMapper">
+  <resultMap id="BaseResultMap" type="com.yue.ums.model.AreaTree">
     <id column="area_id" jdbcType="INTEGER" property="areaId" />
     <result column="area_code" jdbcType="VARCHAR" property="areaCode" />
     <result column="area_level" jdbcType="VARCHAR" property="areaLevel" />
@@ -27,7 +27,7 @@
     delete from area_tree
     where area_id = #{areaId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.ysj.user.model.AreaTree">
+  <insert id="insert" parameterType="com.yue.ums.model.AreaTree">
     insert into area_tree (area_id, area_code, area_level, 
       area_name, parent_area_code, parent_id, 
       key_words, area_region_code, area_zip_code, 
@@ -37,7 +37,7 @@
       #{keyWords,jdbcType=VARCHAR}, #{areaRegionCode,jdbcType=VARCHAR}, #{areaZipCode,jdbcType=VARCHAR}, 
       #{areaPhoneCode,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ysj.user.model.AreaTree">
+  <insert id="insertSelective" parameterType="com.yue.ums.model.AreaTree">
     insert into area_tree
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="areaId != null">
@@ -104,7 +104,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ysj.user.model.AreaTree">
+  <update id="updateByPrimaryKeySelective" parameterType="com.yue.ums.model.AreaTree">
     update area_tree
     <set>
       <if test="areaCode != null">
@@ -137,7 +137,7 @@
     </set>
     where area_id = #{areaId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ysj.user.model.AreaTree">
+  <update id="updateByPrimaryKey" parameterType="com.yue.ums.model.AreaTree">
     update area_tree
     set area_code = #{areaCode,jdbcType=VARCHAR},
       area_level = #{areaLevel,jdbcType=VARCHAR},

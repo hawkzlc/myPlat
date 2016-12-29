@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yue.ums.organize.client.OrgKindRltMapper">
+  <resultMap id="BaseResultMap" type="com.yue.ums.organize.model.OrgKindRlt">
+    <id column="rel_id" jdbcType="INTEGER" property="relId" />
+    <result column="org_id" jdbcType="INTEGER" property="orgId" />
+    <result column="kind_id" jdbcType="INTEGER" property="kindId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="updated" jdbcType="TIMESTAMP" property="updated" />
+    <result column="created_by" jdbcType="INTEGER" property="createdBy" />
+    <result column="updated_by" jdbcType="INTEGER" property="updatedBy" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    rel_id, org_id, kind_id, status, created, updated, created_by, updated_by, note
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from org_kind_rlt
+    where rel_id = #{relId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from org_kind_rlt
+    where rel_id = #{relId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yue.ums.organize.model.OrgKindRlt">
+    insert into org_kind_rlt (rel_id, org_id, kind_id, 
+      status, created, updated, 
+      created_by, updated_by, note
+      )
+    values (#{relId,jdbcType=INTEGER}, #{orgId,jdbcType=INTEGER}, #{kindId,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP}, 
+      #{createdBy,jdbcType=INTEGER}, #{updatedBy,jdbcType=INTEGER}, #{note,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yue.ums.organize.model.OrgKindRlt">
+    insert into org_kind_rlt
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="relId != null">
+        rel_id,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="kindId != null">
+        kind_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="updated != null">
+        updated,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="updatedBy != null">
+        updated_by,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="relId != null">
+        #{relId,jdbcType=INTEGER},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="kindId != null">
+        #{kindId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null">
+        #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=INTEGER},
+      </if>
+      <if test="updatedBy != null">
+        #{updatedBy,jdbcType=INTEGER},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yue.ums.organize.model.OrgKindRlt">
+    update org_kind_rlt
+    <set>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="kindId != null">
+        kind_id = #{kindId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null">
+        updated = #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=INTEGER},
+      </if>
+      <if test="updatedBy != null">
+        updated_by = #{updatedBy,jdbcType=INTEGER},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rel_id = #{relId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yue.ums.organize.model.OrgKindRlt">
+    update org_kind_rlt
+    set org_id = #{orgId,jdbcType=INTEGER},
+      kind_id = #{kindId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      created = #{created,jdbcType=TIMESTAMP},
+      updated = #{updated,jdbcType=TIMESTAMP},
+      created_by = #{createdBy,jdbcType=INTEGER},
+      updated_by = #{updatedBy,jdbcType=INTEGER},
+      note = #{note,jdbcType=VARCHAR}
+    where rel_id = #{relId,jdbcType=INTEGER}
+  </update>
+</mapper>

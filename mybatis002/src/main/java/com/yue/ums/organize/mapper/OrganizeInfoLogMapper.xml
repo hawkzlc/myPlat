@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yue.ums.organize.client.OrganizeInfoLogMapper">
+  <resultMap id="BaseResultMap" type="com.yue.ums.organize.model.OrganizeInfoLog">
+    <id column="log_id" jdbcType="INTEGER" property="logId" />
+    <result column="org_id" jdbcType="INTEGER" property="orgId" />
+    <result column="operate_type" jdbcType="INTEGER" property="operateType" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="operate_datetime" jdbcType="TIMESTAMP" property="operateDatetime" />
+    <result column="operate_by" jdbcType="INTEGER" property="operateBy" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    log_id, org_id, operate_type, status, operate_datetime, operate_by, note
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from organize_info_log
+    where log_id = #{logId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from organize_info_log
+    where log_id = #{logId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yue.ums.organize.model.OrganizeInfoLog">
+    insert into organize_info_log (log_id, org_id, operate_type, 
+      status, operate_datetime, operate_by, 
+      note)
+    values (#{logId,jdbcType=INTEGER}, #{orgId,jdbcType=INTEGER}, #{operateType,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{operateDatetime,jdbcType=TIMESTAMP}, #{operateBy,jdbcType=INTEGER}, 
+      #{note,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yue.ums.organize.model.OrganizeInfoLog">
+    insert into organize_info_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        log_id,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="operateType != null">
+        operate_type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="operateDatetime != null">
+        operate_datetime,
+      </if>
+      <if test="operateBy != null">
+        operate_by,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        #{logId,jdbcType=INTEGER},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="operateType != null">
+        #{operateType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="operateDatetime != null">
+        #{operateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateBy != null">
+        #{operateBy,jdbcType=INTEGER},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yue.ums.organize.model.OrganizeInfoLog">
+    update organize_info_log
+    <set>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="operateType != null">
+        operate_type = #{operateType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="operateDatetime != null">
+        operate_datetime = #{operateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateBy != null">
+        operate_by = #{operateBy,jdbcType=INTEGER},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yue.ums.organize.model.OrganizeInfoLog">
+    update organize_info_log
+    set org_id = #{orgId,jdbcType=INTEGER},
+      operate_type = #{operateType,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      operate_datetime = #{operateDatetime,jdbcType=TIMESTAMP},
+      operate_by = #{operateBy,jdbcType=INTEGER},
+      note = #{note,jdbcType=VARCHAR}
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+</mapper>

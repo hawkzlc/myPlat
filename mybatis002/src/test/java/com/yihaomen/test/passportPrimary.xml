@@ -21,35 +21,33 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 		<!-- 生成模型的包名和位置 -->
-		<javaModelGenerator targetPackage="com.yue.ums.account.model"
+		<javaModelGenerator targetPackage="com.yue.ums.model"
 			targetProject="src/main/java">
 			<!-- <property name="enableSubPackages" value="true" /> <property name="trimStrings" 
 				value="true" /> -->
 		</javaModelGenerator>
 		<!-- 生成映射文件的包名和位置 -->
-		<sqlMapGenerator targetPackage="com.yue.ums.account.mapper"
+		<sqlMapGenerator targetPackage="com.yue.ums.mapper"
 			targetProject="src/main/java">
 			<!-- <property name="enableSubPackages" value="true" /> -->
 		</sqlMapGenerator>
 		<!-- 生成DAO的包名和位置 -->
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.yue.ums.account.client" targetProject="src/main/java">
+			targetPackage="com.yue.ums.client" targetProject="src/main/java">
 			<!-- <property name="enableSubPackages" value="true" /> -->
 		</javaClientGenerator>
 		<!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名 -->
-		<table tableName="account_info" domainObjectName="" enableCountByExample="false"
+		<table tableName="area_tree" domainObjectName="" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false"></table>
-		<table tableName="account_info_log" domainObjectName="" enableCountByExample="false"
+		<table tableName="user_sms" domainObjectName="" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false"></table>
-		<table tableName="account_login_log" domainObjectName="" enableCountByExample="false"
+		<table tableName="ware_kind" domainObjectName="" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false"></table>
-		<table tableName="account_password" domainObjectName="" enableCountByExample="false"
+		<table tableName="system_dict" domainObjectName="" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false"></table>
-		
-		
 	</context>
 </generatorConfiguration>

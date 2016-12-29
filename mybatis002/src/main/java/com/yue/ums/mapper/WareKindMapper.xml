@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yue.ums.client.WareKindMapper">
+  <resultMap id="BaseResultMap" type="com.yue.ums.model.WareKind">
+    <id column="kind_id" jdbcType="INTEGER" property="kindId" />
+    <result column="kind_code" jdbcType="INTEGER" property="kindCode" />
+    <result column="kind_name" jdbcType="VARCHAR" property="kindName" />
+    <result column="kind_desc" jdbcType="VARCHAR" property="kindDesc" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="sort_id" jdbcType="INTEGER" property="sortId" />
+    <result column="created_by" jdbcType="INTEGER" property="createdBy" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="updated_by" jdbcType="INTEGER" property="updatedBy" />
+    <result column="update" jdbcType="TIMESTAMP" property="update" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    kind_id, kind_code, kind_name, kind_desc, parent_id, sort_id, created_by, created, 
+    updated_by, update, note
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ware_kind
+    where kind_id = #{kindId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ware_kind
+    where kind_id = #{kindId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yue.ums.model.WareKind">
+    insert into ware_kind (kind_id, kind_code, kind_name, 
+      kind_desc, parent_id, sort_id, 
+      created_by, created, updated_by, 
+      update, note)
+    values (#{kindId,jdbcType=INTEGER}, #{kindCode,jdbcType=INTEGER}, #{kindName,jdbcType=VARCHAR}, 
+      #{kindDesc,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, #{sortId,jdbcType=INTEGER}, 
+      #{createdBy,jdbcType=INTEGER}, #{created,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=INTEGER}, 
+      #{update,jdbcType=TIMESTAMP}, #{note,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yue.ums.model.WareKind">
+    insert into ware_kind
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="kindId != null">
+        kind_id,
+      </if>
+      <if test="kindCode != null">
+        kind_code,
+      </if>
+      <if test="kindName != null">
+        kind_name,
+      </if>
+      <if test="kindDesc != null">
+        kind_desc,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="sortId != null">
+        sort_id,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="updatedBy != null">
+        updated_by,
+      </if>
+      <if test="update != null">
+        update,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="kindId != null">
+        #{kindId,jdbcType=INTEGER},
+      </if>
+      <if test="kindCode != null">
+        #{kindCode,jdbcType=INTEGER},
+      </if>
+      <if test="kindName != null">
+        #{kindName,jdbcType=VARCHAR},
+      </if>
+      <if test="kindDesc != null">
+        #{kindDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="sortId != null">
+        #{sortId,jdbcType=INTEGER},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        #{updatedBy,jdbcType=INTEGER},
+      </if>
+      <if test="update != null">
+        #{update,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yue.ums.model.WareKind">
+    update ware_kind
+    <set>
+      <if test="kindCode != null">
+        kind_code = #{kindCode,jdbcType=INTEGER},
+      </if>
+      <if test="kindName != null">
+        kind_name = #{kindName,jdbcType=VARCHAR},
+      </if>
+      <if test="kindDesc != null">
+        kind_desc = #{kindDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="sortId != null">
+        sort_id = #{sortId,jdbcType=INTEGER},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        updated_by = #{updatedBy,jdbcType=INTEGER},
+      </if>
+      <if test="update != null">
+        update = #{update,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where kind_id = #{kindId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yue.ums.model.WareKind">
+    update ware_kind
+    set kind_code = #{kindCode,jdbcType=INTEGER},
+      kind_name = #{kindName,jdbcType=VARCHAR},
+      kind_desc = #{kindDesc,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      sort_id = #{sortId,jdbcType=INTEGER},
+      created_by = #{createdBy,jdbcType=INTEGER},
+      created = #{created,jdbcType=TIMESTAMP},
+      updated_by = #{updatedBy,jdbcType=INTEGER},
+      update = #{update,jdbcType=TIMESTAMP},
+      note = #{note,jdbcType=VARCHAR}
+    where kind_id = #{kindId,jdbcType=INTEGER}
+  </update>
+</mapper>

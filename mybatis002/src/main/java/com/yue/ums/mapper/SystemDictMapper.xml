@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yue.ums.client.SystemDictMapper">
+  <resultMap id="BaseResultMap" type="com.yue.ums.model.SystemDict">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="model_name" jdbcType="VARCHAR" property="modelName" />
+    <result column="table_name" jdbcType="VARCHAR" property="tableName" />
+    <result column="column_name" jdbcType="VARCHAR" property="columnName" />
+    <result column="para_type" jdbcType="VARCHAR" property="paraType" />
+    <result column="para_value" jdbcType="VARCHAR" property="paraValue" />
+    <result column="para_name" jdbcType="VARCHAR" property="paraName" />
+    <result column="para_desc" jdbcType="VARCHAR" property="paraDesc" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, model_name, table_name, column_name, para_type, para_value, para_name, para_desc
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from system_dict
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from system_dict
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yue.ums.model.SystemDict">
+    insert into system_dict (id, model_name, table_name, 
+      column_name, para_type, para_value, 
+      para_name, para_desc)
+    values (#{id,jdbcType=INTEGER}, #{modelName,jdbcType=VARCHAR}, #{tableName,jdbcType=VARCHAR}, 
+      #{columnName,jdbcType=VARCHAR}, #{paraType,jdbcType=VARCHAR}, #{paraValue,jdbcType=VARCHAR}, 
+      #{paraName,jdbcType=VARCHAR}, #{paraDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yue.ums.model.SystemDict">
+    insert into system_dict
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="modelName != null">
+        model_name,
+      </if>
+      <if test="tableName != null">
+        table_name,
+      </if>
+      <if test="columnName != null">
+        column_name,
+      </if>
+      <if test="paraType != null">
+        para_type,
+      </if>
+      <if test="paraValue != null">
+        para_value,
+      </if>
+      <if test="paraName != null">
+        para_name,
+      </if>
+      <if test="paraDesc != null">
+        para_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="modelName != null">
+        #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null">
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="columnName != null">
+        #{columnName,jdbcType=VARCHAR},
+      </if>
+      <if test="paraType != null">
+        #{paraType,jdbcType=VARCHAR},
+      </if>
+      <if test="paraValue != null">
+        #{paraValue,jdbcType=VARCHAR},
+      </if>
+      <if test="paraName != null">
+        #{paraName,jdbcType=VARCHAR},
+      </if>
+      <if test="paraDesc != null">
+        #{paraDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yue.ums.model.SystemDict">
+    update system_dict
+    <set>
+      <if test="modelName != null">
+        model_name = #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null">
+        table_name = #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="columnName != null">
+        column_name = #{columnName,jdbcType=VARCHAR},
+      </if>
+      <if test="paraType != null">
+        para_type = #{paraType,jdbcType=VARCHAR},
+      </if>
+      <if test="paraValue != null">
+        para_value = #{paraValue,jdbcType=VARCHAR},
+      </if>
+      <if test="paraName != null">
+        para_name = #{paraName,jdbcType=VARCHAR},
+      </if>
+      <if test="paraDesc != null">
+        para_desc = #{paraDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yue.ums.model.SystemDict">
+    update system_dict
+    set model_name = #{modelName,jdbcType=VARCHAR},
+      table_name = #{tableName,jdbcType=VARCHAR},
+      column_name = #{columnName,jdbcType=VARCHAR},
+      para_type = #{paraType,jdbcType=VARCHAR},
+      para_value = #{paraValue,jdbcType=VARCHAR},
+      para_name = #{paraName,jdbcType=VARCHAR},
+      para_desc = #{paraDesc,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

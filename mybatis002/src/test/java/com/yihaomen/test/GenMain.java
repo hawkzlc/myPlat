@@ -16,12 +16,23 @@ import org.mybatis.generator.internal.DefaultShellCallback;
 
 public class GenMain {
 
-
 	@Test
 	public void main() {
 		List<String> warnings = new ArrayList<String>();
 		boolean overwrite = true;
-		String genCfg = "mbgConfiguration.xml";
+		//String genCfg = "mbgConfiguration.xml";
+		//用户模块账户部分
+		//String genCfg = "passportAccount.xml";
+		//用户模块组织部分
+		//String genCfg = "passportOrganize.xml";
+		//用户模块合作商部分
+		//String genCfg = "passportPartner.xml";
+		//用户模块基础部分
+		//String genCfg = "passportPrimary.xml";
+		//用户模块权限部分
+		String genCfg = "passportPrivilege.xml";
+		
+		
 		File configFile = new File(GenMain.class.getResource(genCfg).getFile());
 		ConfigurationParser cp = new ConfigurationParser(warnings);
 		Configuration config = null;

@@ -1,4 +1,4 @@
-package com.ysj.user.model;
+package com.yue.ums.model;
 
 public class AreaTree {
     private Integer areaId;
@@ -34,7 +34,7 @@ public class AreaTree {
     }
 
     public void setAreaCode(String areaCode) {
-        this.areaCode = areaCode == null ? null : areaCode.trim();
+        this.areaCode = areaCode;
     }
 
     public String getAreaLevel() {
@@ -42,7 +42,7 @@ public class AreaTree {
     }
 
     public void setAreaLevel(String areaLevel) {
-        this.areaLevel = areaLevel == null ? null : areaLevel.trim();
+        this.areaLevel = areaLevel;
     }
 
     public String getAreaName() {
@@ -50,7 +50,7 @@ public class AreaTree {
     }
 
     public void setAreaName(String areaName) {
-        this.areaName = areaName == null ? null : areaName.trim();
+        this.areaName = areaName;
     }
 
     public String getParentAreaCode() {
@@ -58,7 +58,7 @@ public class AreaTree {
     }
 
     public void setParentAreaCode(String parentAreaCode) {
-        this.parentAreaCode = parentAreaCode == null ? null : parentAreaCode.trim();
+        this.parentAreaCode = parentAreaCode;
     }
 
     public Integer getParentId() {
@@ -74,7 +74,7 @@ public class AreaTree {
     }
 
     public void setKeyWords(String keyWords) {
-        this.keyWords = keyWords == null ? null : keyWords.trim();
+        this.keyWords = keyWords;
     }
 
     public String getAreaRegionCode() {
@@ -82,7 +82,7 @@ public class AreaTree {
     }
 
     public void setAreaRegionCode(String areaRegionCode) {
-        this.areaRegionCode = areaRegionCode == null ? null : areaRegionCode.trim();
+        this.areaRegionCode = areaRegionCode;
     }
 
     public String getAreaZipCode() {
@@ -90,7 +90,7 @@ public class AreaTree {
     }
 
     public void setAreaZipCode(String areaZipCode) {
-        this.areaZipCode = areaZipCode == null ? null : areaZipCode.trim();
+        this.areaZipCode = areaZipCode;
     }
 
     public String getAreaPhoneCode() {
@@ -98,6 +98,6 @@ public class AreaTree {
     }
 
     public void setAreaPhoneCode(String areaPhoneCode) {
-        this.areaPhoneCode = areaPhoneCode == null ? null : areaPhoneCode.trim();
+        this.areaPhoneCode = areaPhoneCode;
     }
 }

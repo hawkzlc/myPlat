@@ -1,6 +1,6 @@
-package com.ysj.user.client;
+package com.yue.ums.client;
 
-import com.ysj.user.model.AreaTree;
+import com.yue.ums.model.AreaTree;
 
 public interface AreaTreeMapper {
     int deleteByPrimaryKey(Integer areaId);
