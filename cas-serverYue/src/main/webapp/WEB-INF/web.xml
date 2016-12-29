@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Licensed to Jasig under one or more contributor license
+    agreements. See the NOTICE file distributed with this work
+    for additional information regarding copyright ownership.
+    Jasig licenses this file to you under the Apache License,
+    Version 2.0 (the "License"); you may not use this file
+    except in compliance with the License.  You may obtain a
+    copy of the License at the following location:
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+
+-->
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_5.xsd"
+         version="2.5">
+  <display-name>Central Authentication System (CAS) 4.0.0</display-name>
+	<filter>
+		<filter-name>springSessionRepositoryFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSessionRepositoryFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> 
+<!-- 设置需要加载的spring配置文件 -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>
+      /WEB-INF/spring-configuration/*.xml
+      /WEB-INF/deployerConfigContext.xml
+    </param-value>
+  </context-param>
+
+<!-- 配置filter,所有访问均需过滤, ClientInfoThreadLocalFilter这个类也没有太多的逻辑，就是获取了request.getLocalAddr(), request.getRemoteAddr()存放在ClientInfoHolder这个类中-->
+  <filter>
+    <filter-name>CAS Client Info Logging Filter</filter-name>
+    <filter-class>com.github.inspektr.common.web.ClientInfoThreadLocalFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>CAS Client Info Logging Filter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+<!-- DelegatingFilterProxy,这个过滤器没有实现太多的逻辑，他的作用是将filter交给IOC容器管理而不是交给servlet容器管理 。这样做的好处是获得了Spring的依赖注入和生命周期的接口 -->
+  <filter>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <url-pattern>/status</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <url-pattern>/statistics</url-pattern>
+  </filter-mapping>
+<!-- spring的编码过滤器 -->
+  <filter>
+    <filter-name>characterEncodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>characterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <!--
+    - Loads the CAS ApplicationContext.
+    加载cas应用的上下文
+    
+    - The deployer choice here is how to handle Throwables thrown by Spring's
+    此处的deployer选项是定义怎么处理由spring抛出的Throwables
+    
+    - ContextLoaderListener.  The Spring ContextLoaderListener will throw an exception when the
+  	上下文监听器.当应用的上下文未能成功加载时由spring的上下文监听器抛出异常
+    - application context cannot be loaded, say because the bean XML files are not valid XML or do not
+    告知 因为bean的xml配置文件不合法或者未能指向正确的类和属性,或者由spring配置的bean在构建过程/属性设置/属性设置后的方法中抛出异常
+    - refer to real classes and properties or because a bean configured via Spring throws an exception
+    - at construction, property setting, or on an afterPropertiesSet() lifecycle method.
+    -
+    - If you'd like these errors to be fatal and prevent the CAS servlet context from loading at all,
+    - use org.springframework.web.context.ContextLoaderListener.
+    如果你不希望这些错误阻止cas应用成功完全加载,你可以用org.springframework.web.context.ContextLoaderListener替换掉原有的类
+    -
+    - If you'd like these errors to result in all requests for CAS getting a "CAS is Unavailable" response,
+    - use org.jasig.cas.web.init.SafeContextLoaderListener
+    如果你希望这些访问cas的请求触发的错误获得一个"cas不可用"的response,则使用下面默认的类配置
+  -->
+  <listener>
+    <listener-class>
+      org.jasig.cas.web.init.SafeContextLoaderListener
+    </listener-class>
+  </listener>
+
+  <!--
+    - This is the Spring dispatcher servlet which delegates all requests to the
+    - Spring WebMVC controllers as configured in cas-servlet.xml.
+    这是spring的分发器配置,将把所有访问请求交由配置在[cas-servlet.xml]中的springmvc的controller来处理.
+    -
+    - The choice made above about how to handle a broken ApplicationContext at
+    - context initialization applies here as well, since this servlet is load-on-startup.
+    从这个servlet起应用启动加载完成
+    -
+    - If you'd like these errors to be fatal and prevent the CAS servlet from loading at all,
+    - use org.springframework.web.servlet.DispatcherServlet.
+    -
+    - If you'd like these errors to result in all requests for CAS getting a "CAS is Unavailable" response,
+    - use org.jasig.cas.web.init.SafeDispatcherServlet
+  -->
+  <servlet>
+    <servlet-name>cas</servlet-name>
+    <servlet-class>
+      org.jasig.cas.web.init.SafeDispatcherServlet
+    </servlet-class>
+    <init-param>
+      <param-name>publishContext</param-name>
+      <param-value>false</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+	
+  <servlet-mapping>
+    <servlet-name>cas</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>cas</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>cas</servlet-name>
+    <url-pattern>/validate</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>cas</servlet-name>
+    <url-pattern>/serviceValidate</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>cas</servlet-name>
+    <url-pattern>/p3/serviceValidate</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>cas</servlet-name>
+    <url-pattern>/proxy</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>cas</servlet-name>
+    <url-pattern>/proxyValidate</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>cas</servlet-name>
+    <url-pattern>/p3/proxyValidate</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>cas</servlet-name>
+    <url-pattern>/CentralAuthenticationService</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>cas</servlet-name>
+    <url-pattern>/status</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>cas</servlet-name>
+    <url-pattern>/statistics</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>cas</servlet-name>
+    <url-pattern>/authorizationFailure.html</url-pattern>
+  </servlet-mapping>
+
+  <session-config>
+    <!-- Default to 5 minute session timeouts, session的默认失效时间为5分钟 -->
+    <session-timeout>5</session-timeout>
+  </session-config>
+
+  <error-page>
+    <error-code>401</error-code>
+    <location>/authorizationFailure.html</location>
+  </error-page>
+
+  <error-page>
+    <error-code>403</error-code>
+    <location>/authorizationFailure.html</location>
+  </error-page>
+
+  <error-page>
+    <error-code>404</error-code>
+    <location>/</location>
+  </error-page>
+
+  <error-page>
+    <error-code>500</error-code>
+    <location>/WEB-INF/view/jsp/errors.jsp</location>
+  </error-page>
+
+  <error-page>
+    <error-code>501</error-code>
+    <location>/WEB-INF/view/jsp/errors.jsp</location>
+  </error-page>
+
+  <error-page>
+    <error-code>503</error-code>
+    <location>/WEB-INF/view/jsp/errors.jsp</location>
+  </error-page>
+
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
